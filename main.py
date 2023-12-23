@@ -6,6 +6,11 @@ from copy import deepcopy
 from random import randint
 
 
+
+sel_sound = 'sounds/interface-124464.mp3'
+unsel_sound = '../sounds/button-124476.mp3'
+
+
 RES = WIDTH, HEIGHT = 1600, 900
 FPS = 10
 
@@ -15,9 +20,17 @@ W, H = WIDTH // TILE, HEIGHT // TILE
 
 print(W, H)
 
+
+
 #initializing pygame
 
 pygame.init()
+pygame.mixer.init()
+
+select_sound = pygame.mixer.Sound("sounds/interface-124464.mp3")
+unselect_sound = pygame.mixer.Sound("sounds/button-124476.mp3")
+
+
 
 surface = pygame.display.set_mode(RES)
 clock = pygame.time.Clock()
@@ -60,6 +73,7 @@ while True:
                 posx, posy = pygame.mouse.get_pos()
                 print(f'Mouse clicked at {posx//TILE}, {posy//TILE}')
                 current_field[(posy//TILE)][(posx//TILE)] = 1
+                pygame.mixer.Sound.play(select_sound)
                 
 
             elif pygame.mouse.get_pressed()[2]: # Right click
@@ -67,6 +81,8 @@ while True:
                 posx, posy = pygame.mouse.get_pos()
                 print(f'Mouse clicked at {posx//TILE}, {posy//TILE}')
                 current_field[(posy//TILE)][(posx//TILE)] = 0
+                pygame.mixer.Sound.play(unselect_sound)
+
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
                 start_game = True
