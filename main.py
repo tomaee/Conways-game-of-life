@@ -7,8 +7,7 @@ from random import randint
 
 
 
-sel_sound = 'sounds/interface-124464.mp3'
-unsel_sound = '../sounds/button-124476.mp3'
+
 
 
 RES = WIDTH, HEIGHT = 1600, 900
@@ -27,8 +26,13 @@ print(W, H)
 pygame.init()
 pygame.mixer.init()
 
-select_sound = pygame.mixer.Sound("sounds/interface-124464.mp3")
-unselect_sound = pygame.mixer.Sound("sounds/button-124476.mp3")
+select_sound = pygame.mixer.Sound("sounds/stop-13692.mp3")
+select_sound.set_volume(0.2)
+unselect_sound = pygame.mixer.Sound("sounds/pick-92276.mp3")
+unselect_sound.set_volume(0.2)
+pygame.mixer.music.load("sounds/Tartini Violin Sonata in G minor ''Devil's Trill Sonata'' (320 kbps).mp3")
+pygame.mixer.music.set_volume(0.3) 
+pygame.mixer.music.play() 
 
 
 
@@ -85,7 +89,7 @@ while True:
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
-                start_game = True
+                start_game = not start_game
     
     #gird
     [pygame.draw.line(surface, pygame.Color('dimgray'), (x, 0), (x, HEIGHT)) for x in range(0, WIDTH, TILE)]
